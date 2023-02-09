@@ -1,0 +1,35 @@
+<?php 
+
+namespace Src\VO;
+use Src\_Public\Util;
+
+class SetorVO extends LogErroVo{
+
+
+    private $id;
+    private $nome;
+
+    //GET E SET ID
+    public function setId($p_id) : void
+    {
+        $this->id = $p_id;
+    }
+    public function getId() : int
+    {
+        return $this->id;
+    }
+
+    //GET E SET NOME 
+    public function setNome($p_nome) : void
+    {
+        $this->nome = Util::TratarDadosGeral($p_nome);
+    }
+    public function getNome() : string
+    {
+        return $this->nome;
+    }
+
+
+
+
+}
