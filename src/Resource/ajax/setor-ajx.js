@@ -39,7 +39,7 @@ function AlterarSetor(id_form) {
                     MensagemSucesso();
                     LimparCampos(id_form);
                     ConsultarSetor();
-                    ESCONDER_MODAL("modal_setor ")
+                    ESCONDER_MODAL("modal_setor")
                 } else if (retorno == -1) {
                     MensagemErro();
                 }
