@@ -27,7 +27,7 @@ require_once dirname(__DIR__, 2) . "/Resource/dataview/gerenciar_equipamento-dat
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Novo Equipamento</h1>
+                            <h1> <?= $acao ?> Equipamento </h1>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -69,14 +69,14 @@ require_once dirname(__DIR__, 2) . "/Resource/dataview/gerenciar_equipamento-dat
                                     </div>
                                     <div class="form-group">
                                         <label>Identificação</label>
-                                        <input type="text" class="form-control obg" name="id_equipamento" id="id_equipamento" placeholder="Digite Aqui...">
+                                        <input type="text" class="form-control obg" name="identificacao" id="identificacao" placeholder="Digite Aqui...">
                                     </div>
                                     <div class="form-group">
                                         <label>Descrição</label>
                                         <textarea style="resize: none;" class="form-control obg" name="descricao_equipamento" id="descricao_equipamento" cols="30" rows="5" placeholder="Digite Aqui..."></textarea>
                                     </div>
 
-                                    <button class="btn btn-success" name="btn_gravar" onclick="return CadastrarEquipamento('form_cad')">Gravar</button>
+                                    <button class="btn btn-success" name="btn_gravar" onclick="return CadastrarEquipamento('form_cad')"><?= $acao ?></button>
                                 </div>
                             </div>
                         </form>

@@ -29,6 +29,26 @@ class EquipamentoDAO extends Conexao{
             return -1;
         }
     }
+
+    #Alterar
+    public function AlterarEquipamentoDAO(EquipamentoVO $vo):int{
+        $sql = $this->conexao->prepare(EquipamentoSQL::INSERIR_EQUIPAMENTO());
+        $i = 1;
+        $sql->bindValue($i++, $vo->getIdentificacao());
+        $sql->bindValue($i++, $vo->getDescricao());
+        $sql->bindValue($i++, $vo->getIdModeloEquipamento());
+        $sql->bindValue($i++, $vo->getIdTipoEquipamento());
+        $sql->bindValue($i++, $vo->getId());
+        try{
+            $sql->execute();
+            return 1;
+        }catch(Exception $ex){
+            $vo->setMsgErro($ex->getMessage());
+            parent::GravarErroLog($vo);
+            return -1;
+        }
+    }
+
     #Consultar
     public function ConsultarEquipamentoDAO(string $nome = ''):array{
         $sql = $this->conexao->prepare(EquipamentoSQL::CONSULTAR_EQUIPAMENTO($nome));
@@ -39,6 +59,7 @@ class EquipamentoDAO extends Conexao{
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     
     }
+    
     #Excluir
     public function ExcluirEquipamentoDAO(EquipamentoVO $vo):int{
         $sql = $this->conexao->prepare(EquipamentoSQL::EXCLUIR_EQUIPAMENTO());

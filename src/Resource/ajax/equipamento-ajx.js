@@ -1,7 +1,7 @@
 function CadastrarEquipamento(id_form){
     let tipo = $("#tipo").val();
     let modelo = $("#modelo").val();
-    let identificacao = $("#id_equipamento").val();
+    let identificacao = $("#identificacao").val();
     let descricao = $("#descricao_equipamento").val();
 
     if(NotificarCampos(id_form)){
