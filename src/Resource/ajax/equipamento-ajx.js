@@ -11,7 +11,7 @@ function CadastrarEquipamento(id_form){
             data: {
                 tipo: tipo,
                 modelo: modelo,
-                id_equipamento: identificacao,
+                identificacao: identificacao,
                 descricao_equipamento: descricao,
                 btn_gravar: "ajx"
             }, success: function(retorno){
