@@ -15,7 +15,7 @@ class EquipamentoSQL
                             VALUES (?, ?, ?, ?)';
         return $sql;
     }
-    
+
     public static function ALTERAR_EQUIPAMENTO(): string
     {
         $sql = 'UPDATE tb_equipamento 
@@ -27,7 +27,7 @@ class EquipamentoSQL
         return $sql;
     }
 
-    public static function CONSULTAR_EQUIPAMENTO($nome): string
+    public static function CONSULTAR_EQUIPAMENTO($nome, $tipo, $modelo): string
     {
         $sql = 'SELECT eq.id as id, 
                        tp.nome as tipo, 
@@ -39,8 +39,29 @@ class EquipamentoSQL
                   ON eq.tipo_equipamento_id = tp.id
                   INNER JOIN tb_modelo_equipamento as mo
                   ON eq.modelo_equipamento_id = mo.id';
-        if (!empty($nome)) {
-            $sql .= " WHERE tp.nome like ?";
+        
+        if (!empty($tipo)) {
+            $sql .= ' WHERE tp.id = ?';
+            if (!empty($modelo)) {
+                $sql .= ' and mo.id = ?';
+            }
+            if (!empty($nome)) {
+                $sql .= " and eq.identificacao like ?";
+            }
+        } 
+        
+        else if (!empty($modelo)) {
+            $sql .= ' WHERE mo.id = ?';
+            if (!empty($tipo)) {
+                $sql .= ' and tp.id = ?';
+            }
+            if (!empty($nome)) {
+                $sql .= " and eq.identificacao like ?";
+            }
+        }
+
+        if (!empty($nome) && (empty($tipo) && empty($modelo))) {
+            $sql .= " WHERE eq.identificacao like ?";
         }
         $sql .= " ORDER BY eq.id desc";
 

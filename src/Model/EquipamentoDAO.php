@@ -50,10 +50,30 @@ class EquipamentoDAO extends Conexao{
     }
 
     #Consultar
-    public function ConsultarEquipamentoDAO(string $nome = ''):array{
-        $sql = $this->conexao->prepare(EquipamentoSQL::CONSULTAR_EQUIPAMENTO($nome));
-        if(!empty($nome)){
-            $sql->bindValue(1, "%" . $nome . "%");
+    public function ConsultarEquipamentoDAO(string $nome = '', string $tipo = '', string $modelo = ''):array{
+        $sql = $this->conexao->prepare(EquipamentoSQL::CONSULTAR_EQUIPAMENTO($nome, $tipo, $modelo));
+        $i = 1;
+        if(!empty($tipo)){
+            $sql->bindValue($i++, $tipo);
+            if(!empty($modelo)){
+               $sql->bindValue($i++, $modelo);
+            }
+            if(!empty($nome)){
+                $sql->bindValue($i++, "%" . $nome . "%");
+            }
+        }
+        else if(!empty($modelo)){
+            $sql->bindValue($i++, $modelo);
+        
+            if(!empty($tipo)){
+                $sql->bindValue($i++, $tipo);
+            }
+            if(!empty($nome)){
+                $sql->bindValue($i++, "%" . $nome . "%");
+            }
+        }
+        if(!empty($nome) && (empty($tipo) && empty($modelo))){
+            $sql->bindValue($i++, "%" . $nome . "%");
         }
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_ASSOC);

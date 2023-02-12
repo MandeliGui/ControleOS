@@ -30,8 +30,8 @@ class EquipamentoCTRL
 
     }
     #Consultar
-    public function ConsultarEquipamentoCTRL(string $nome = ''):array{
-        return $this->dao->ConsultarEquipamentoDAO($nome);
+    public function ConsultarEquipamentoCTRL(string $nome = '', string $tipo = '', string $modelo = ''):array{
+        return $this->dao->ConsultarEquipamentoDAO($nome, $tipo, $modelo);
     }
     #Excluir
     public function ExcluirEquipamentoCTRL(EquipamentoVO $vo):int{

@@ -28,13 +28,17 @@ function CadastrarEquipamento(id_form){
 }
 
 function ConsultarEquipamento(){
-    let filtro = $("#busca_tipo").val();
+    let filtro = $("#nome_filtro").val();
+    let tipo = $("#filtro_tipo").val();
+    let modelo = $("#filtro_modelo").val();
     $.ajax({
         type:"post",
         url: BASE_URL("gerenciar_equipamento-dataview"),
         data: {
             consultar_ajx: "ajx",
-            busca_tipo: filtro
+            nome_filtro: filtro,
+            filtro_tipo: tipo,
+            filtro_modelo: modelo
         },success: function(retorno){
             $("#Table_Result").html(retorno);
         }

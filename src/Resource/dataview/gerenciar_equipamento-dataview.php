@@ -46,7 +46,7 @@ else if (isset($_POST['btn_excluir'])) {
 }
 #Consultar
 else if (isset($_POST['consultar_ajx']) && $_POST['consultar_ajx'] == 'ajx') {
-    $equipamentos = $ctrl->ConsultarEquipamentoCTRL($_POST['busca_tipo']);
+    $equipamentos = $ctrl->ConsultarEquipamentoCTRL($_POST['nome_filtro'], $_POST['filtro_tipo'], $_POST['filtro_modelo']);
 ?>
     <table class="table table-hover" id="Table_Result">
         <thead>

@@ -42,33 +42,58 @@ require_once dirname(__DIR__, 2) . "/Resource/dataview/gerenciar_equipamento-dat
                         <h3 class="card-title">Voce realizará consultas de equipamentos nessa pagina</h3>
                     </div>
                     <div class="card-body">
-                        <form action="consultar_equipamento.php" method="post">
-                            <div class="form-group">
-                                <label for="">Pesquisar por Tipo</label>
-                                <input type="text" class="form-control" onkeyup="ConsultarEquipamento()" name="busca_tipo" id="busca_tipo" placeholder="digite aqui...">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Tipo</label>
+                                <select class="form-control select2 obg" style="width: 100%;" onchange="ConsultarEquipamento()" name="filtro_tipo" id="filtro_tipo">
+                                    <option value="">- SEM FILTRO - </option>
+                                    <?php foreach ($tipos as $item) { ?>
+                                        <option value="<?= $item['id'] ?>">
+                                            <?= $item['nome'] ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
                             </div>
-                            <button type="button" onclick="ConsultarEquipamento()" class="btn btn-success" name="btn_buscar">Buscar</button>
-                        </form>
+                            <div class="form-group col-md-6">
+                                <label>Modelo</label>
+                                <select class="form-control select2 obg" style="width: 100%;" onchange="ConsultarEquipamento()" name="filtro_modelo" id="filtro_modelo">
+                                    <option value="">- SEM FILTRO - </option>
+                                    <?php foreach ($modelos as $item) { ?>
+                                        <option value="<?= $item['id'] ?>">
+                                            <?= $item['nome'] ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
                         <hr>
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">Equipmentos cadastrados</h3>
+                                        <div class="card-tools">
+                                            <div class="input-group input-group-sm" style="width: 150px;">
+                                                <input type="text" onkeyup="ConsultarEquipamento()" name="nome_filtro" id="nome_filtro" class="form-control float-right" placeholder="Identificação">
 
+                                                <div class="input-group-append">
+                                                    <button type="button" onclick="ConsultarModeloEquipamento()" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body table-responsive p-0">
                                         <table class="table table-hover" id="Table_Result">
-                                            
+
                                         </table>
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
                                 <!-- /.card -->
                             </div>
-                            <?php 
+                            <?php
                             include_once 'modals/_modal_excluir.php';
                             ?>
                         </div>
@@ -93,7 +118,9 @@ require_once dirname(__DIR__, 2) . "/Resource/dataview/gerenciar_equipamento-dat
     include_once PATH_URL . 'Template/_includes/_msg.php';
     ?>
     <script src="../../Resource/ajax/equipamento-ajx.js"></script>
-    <script>ConsultarEquipamento()</script>
+    <script>
+        ConsultarEquipamento()
+    </script>
 </body>
 
 </html>
