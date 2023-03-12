@@ -19,7 +19,7 @@ class GerenciarSetorSQL
         if (!empty($nome)) {
             $sql .= ' WHERE nome like ?';
         }
-
+            
         $sql .= ' ORDER BY nome';
 
         return $sql;

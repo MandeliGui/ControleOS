@@ -86,6 +86,7 @@ require_once dirname(__DIR__, 2) . '/Resource/dataview/gerenciar_modelo_equipame
                             </div>
                         </div>
                     </div>
+                    <div id="divLoad"></div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->

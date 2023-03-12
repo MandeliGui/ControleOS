@@ -1,6 +1,7 @@
 function CadastrarTipoEquipamento(id_form) {
     
     if (NotificarCampos(id_form)) {
+        CarregarTela();
         let palavra_campo = $("#nome_tipo").val();
         $.ajax({
             type: "post",
@@ -10,6 +11,7 @@ function CadastrarTipoEquipamento(id_form) {
                 btn_cadastrar: 'ajx'
             },
             success: function (retorno) {
+                EncerrarTela();
                 if (retorno == 1) {
                     MensagemSucesso();
                     LimparCampos(id_form);
@@ -27,6 +29,7 @@ function CadastrarTipoEquipamento(id_form) {
 function AlterarTipoEquipamento(id_form) {
     
     if (NotificarCampos(id_form)) {
+        CarregarTela();
         let palavra_campo = $("#nome_alt").val();
         let id_campo = $("#id_alt").val();
         $.ajax({
@@ -38,6 +41,7 @@ function AlterarTipoEquipamento(id_form) {
                 btn_alterar: 'ajx'
             },
             success: function (retorno) {
+                EncerrarTela();
                 if (retorno == 1) {
                     MensagemSucesso();
                     LimparCampos(id_form)

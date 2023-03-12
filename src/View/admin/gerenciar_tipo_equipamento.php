@@ -74,6 +74,7 @@ require_once dirname(__DIR__, 2) . '/Resource/dataview/gerenciar_tipo_equipament
 
                                         </table>
                                     </div>
+
                                     <!-- /.card-body -->
                                     <form id="form_alt" action="gerenciar_tipo_equipamento.php" method="post">
                                         <?php
@@ -86,6 +87,7 @@ require_once dirname(__DIR__, 2) . '/Resource/dataview/gerenciar_tipo_equipament
                             </div>
                         </div>
                     </div>
+                    <div id="divLoad"></div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->

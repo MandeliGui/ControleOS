@@ -39,27 +39,31 @@ class EquipamentoSQL
                   ON eq.tipo_equipamento_id = tp.id
                   INNER JOIN tb_modelo_equipamento as mo
                   ON eq.modelo_equipamento_id = mo.id';
-        
+        #Filtro tipo selecionado primeiro
         if (!empty($tipo)) {
             $sql .= ' WHERE tp.id = ?';
+            #Filtro modelo selecionado depois
             if (!empty($modelo)) {
                 $sql .= ' and mo.id = ?';
             }
-            if (!empty($nome)) {
-                $sql .= " and eq.identificacao like ?";
-            }
-        } 
-        
-        else if (!empty($modelo)) {
-            $sql .= ' WHERE mo.id = ?';
-            if (!empty($tipo)) {
-                $sql .= ' and tp.id = ?';
-            }
+            #Filtro digitavel
             if (!empty($nome)) {
                 $sql .= " and eq.identificacao like ?";
             }
         }
-
+        #Filtro modelo selecionado primeiro
+        else if (!empty($modelo)) {
+            $sql .= ' WHERE mo.id = ?';
+            #Filtro tipo selecionado depois
+            if (!empty($tipo)) {
+                $sql .= ' and tp.id = ?';
+            }
+            #filtro digitavel
+            if (!empty($nome)) {
+                $sql .= " and eq.identificacao like ?";
+            }
+        }
+        #somente filtro digitavel
         if (!empty($nome) && (empty($tipo) && empty($modelo))) {
             $sql .= " WHERE eq.identificacao like ?";
         }
@@ -68,6 +72,18 @@ class EquipamentoSQL
         return $sql;
     }
 
+    public static function DETALHAR_EQUIPAMENTO(): string
+    {
+        $sql = 'SELECT id,
+                       identificacao,
+                       descricao,
+                       modelo_equipamento_id,
+                       tipo_equipamento_id
+                       FROM tb_equipamento
+                       WHERE id = ?';
+        return $sql;
+
+    }
 
     public static function EXCLUIR_EQUIPAMENTO(): string
     {

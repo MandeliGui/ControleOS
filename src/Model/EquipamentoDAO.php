@@ -8,6 +8,7 @@ use Src\VO\EquipamentoVO;
 class EquipamentoDAO extends Conexao{
 
     private $conexao;
+    
     public function __construct()
     {
         $this->conexao = parent::retornaConexao();
@@ -32,7 +33,7 @@ class EquipamentoDAO extends Conexao{
 
     #Alterar
     public function AlterarEquipamentoDAO(EquipamentoVO $vo):int{
-        $sql = $this->conexao->prepare(EquipamentoSQL::INSERIR_EQUIPAMENTO());
+        $sql = $this->conexao->prepare(EquipamentoSQL::ALTERAR_EQUIPAMENTO());
         $i = 1;
         $sql->bindValue($i++, $vo->getIdentificacao());
         $sql->bindValue($i++, $vo->getDescricao());
@@ -63,7 +64,7 @@ class EquipamentoDAO extends Conexao{
             }
         }
         else if(!empty($modelo)){
-            $sql->bindValue($i++, $modelo);
+            $sql->bindValue($i++, $modelo); 
         
             if(!empty($tipo)){
                 $sql->bindValue($i++, $tipo);
@@ -78,6 +79,14 @@ class EquipamentoDAO extends Conexao{
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     
+    }
+
+    public function DetalharEquipamentoDAO(int $id): array | bool{
+        $sql = $this->conexao->prepare(EquipamentoSQL::DETALHAR_EQUIPAMENTO());
+        $sql->bindValue(1, $id);
+        $sql->execute();
+        #quando traz somente uma linha do bd usar fetch ao inves de fetchAll
+        return $sql->fetch(\PDO::FETCH_ASSOC);
     }
     
     #Excluir

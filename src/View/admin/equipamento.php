@@ -46,11 +46,14 @@ require_once dirname(__DIR__, 2) . "/Resource/dataview/gerenciar_equipamento-dat
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <?php if (isset($dados)) { ?>
+                                            <input type="hidden" id="id_alt" name="id_alt" value="<?= $dados['id'] ?>">
+                                        <?php } ?>
                                         <label>Tipo</label>
                                         <select class="form-control select2 obg" style="width: 100%;" name="tipo" id="tipo">
                                             <option value="">Selecione</option>
                                             <?php foreach ($tipos as $item) { ?>
-                                                <option value="<?= $item['id'] ?>">
+                                                <option value="<?= $item['id'] ?>" <?= isset($dados) ? (($dados['tipo_equipamento_id'] == $item['id']) ? 'selected' : '') : '' ?>>
                                                     <?= $item['nome'] ?>
                                                 </option>
                                             <?php } ?>
@@ -61,7 +64,7 @@ require_once dirname(__DIR__, 2) . "/Resource/dataview/gerenciar_equipamento-dat
                                         <select class="form-control select2 obg" style="width: 100%;" name="modelo" id="modelo">
                                             <option value="">Selecione</option>
                                             <?php foreach ($modelos as $item) { ?>
-                                                <option value="<?= $item['id'] ?>">
+                                                <option value="<?= $item['id'] ?>" <?= isset($dados) ? (($dados['modelo_equipamento_id'] == $item['id']) ? 'selected' : '') : '' ?>>
                                                     <?= $item['nome'] ?>
                                                 </option>
                                             <?php } ?>
@@ -69,18 +72,21 @@ require_once dirname(__DIR__, 2) . "/Resource/dataview/gerenciar_equipamento-dat
                                     </div>
                                     <div class="form-group">
                                         <label>Identificação</label>
-                                        <input type="text" class="form-control obg" name="identificacao" id="identificacao" placeholder="Digite Aqui...">
+                                        <input type="text" class="form-control obg" name="identificacao" id="identificacao" placeholder="Digite Aqui..." value="<?= isset($dados) ? $dados['identificacao'] : '' ?>">
                                     </div>
                                     <div class="form-group">
                                         <label>Descrição</label>
-                                        <textarea style="resize: none;" class="form-control obg" name="descricao_equipamento" id="descricao_equipamento" cols="30" rows="5" placeholder="Digite Aqui..."></textarea>
+                                        <textarea style="resize: none;" class="form-control obg" name="descricao_equipamento" id="descricao_equipamento" cols="30" rows="5" placeholder="Digite Aqui..."><?= isset($dados) ? $dados['descricao'] : '' ?></textarea>
                                     </div>
 
-                                    <button class="btn btn-success" name="btn_gravar" onclick="return CadastrarEquipamento('form_cad')"><?= $acao ?></button>
+                                    <button class="btn btn-success" name="btn_<?= $botao ?>" onclick="return <?= $acao ?>Equipamento('form_cad')"><?= $acao ?></button>
                                 </div>
                             </div>
                         </form>
                     </div>
+                    
+                    <div id="divLoad"></div>
+
                 </div>
             </section>
         </div>
@@ -95,7 +101,7 @@ require_once dirname(__DIR__, 2) . "/Resource/dataview/gerenciar_equipamento-dat
     include_once PATH_URL . 'Template/_includes/_msg.php';
     ?>
 
-<script src="../../Resource/ajax/equipamento-ajx.js"></script>
+    <script src="../../Resource/ajax/equipamento-ajx.js"></script>
 </body>
 
 </html>

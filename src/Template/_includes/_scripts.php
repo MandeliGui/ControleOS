@@ -11,4 +11,5 @@
 <script src="../../Resource/js/mensagem_ambiente.js"></script>
 <script src="../../Resource/js/validacao.js"></script>
 <script src="../../Resource/js/funcoes.js"></script>
+<script src="../../Resource/js/equipamento.js"></script>
 <script src="../../Resource/js/carregar_modal.js"></script>

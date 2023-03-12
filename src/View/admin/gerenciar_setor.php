@@ -70,9 +70,10 @@ require_once dirname(__DIR__, 2) . '/Resource/dataview/gerenciar_setor-dataview.
                                     <!-- /.card-header -->
                                     <div class="card-body table-responsive p-0">
                                         <table class="table table-hover" id="Table_Result">
-                                            
+
                                         </table>
                                     </div>
+
                                     <!-- /.card-body -->
                                     <form action="gerenciar_setor.php" method="post" id="form_alt">
                                         <?php
@@ -85,6 +86,7 @@ require_once dirname(__DIR__, 2) . '/Resource/dataview/gerenciar_setor-dataview.
                             </div>
                         </div>
                     </div>
+                    <div id="divLoad"></div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -104,7 +106,9 @@ require_once dirname(__DIR__, 2) . '/Resource/dataview/gerenciar_setor-dataview.
     include_once PATH_URL . 'Template/_includes/_msg.php';
     ?>
     <script src="../../Resource/ajax/setor-ajx.js"></script>
-    <script>ConsultarSetor()</script>
+    <script>
+        ConsultarSetor()
+    </script>
 
 
 

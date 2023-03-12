@@ -1,6 +1,7 @@
 function CadastrarSetor(id_form) {
     let nome_campo = $("#nome").val();
     if (NotificarCampos(id_form)) {
+        CarregarTela();
         $.ajax({
             type: "post",
             url: BASE_URL("gerenciar_setor-dataview"),
@@ -9,6 +10,7 @@ function CadastrarSetor(id_form) {
                 btn_cadastrar: "ajx"
             },
             success: function (retorno) {
+                EncerrarTela();
                 if (retorno == 1) {
                     MensagemSucesso();
                     LimparCampos(id_form);
@@ -26,6 +28,7 @@ function AlterarSetor(id_form) {
     let nome_campo = $("#nome_alt").val();
     let id_campo = $("#id_alt").val();
     if (NotificarCampos(id_form)) {
+        CarregarTela();
         $.ajax({
             type: "post",
             url: BASE_URL("gerenciar_setor-dataview"),
@@ -35,6 +38,7 @@ function AlterarSetor(id_form) {
                 btn_alterar: "ajx"
             },
             success: function (retorno) {
+                EncerrarTela();
                 if (retorno == 1) {
                     MensagemSucesso();
                     LimparCampos(id_form);

@@ -11,6 +11,11 @@ class Util
 
     }
 
+    public static function ChamarPagina($pagina){
+        header("location: $pagina.php");
+        exit;
+    }
+
     public static function CodigoLogado()
     {
         return 1;

@@ -1,6 +1,7 @@
 <?php
 require_once "_include_autoload.php";
 
+use Src\_Public\Util;
 use Src\VO\EquipamentoVO;
 use Src\Controller\EquipamentoCTRL;
 use Src\Controller\ModeloEquipamentoCTRL;
@@ -12,9 +13,17 @@ $tipos = (new TipoEquipamentoCTRL)->ConsultarTipoEquipamentoCTRL();
 $modelos = (new ModeloEquipamentoCTRL)->ConsultarModeloEquipamentoCTRL();
 
 $acao = 'Cadastrar';
+$botao = 'gravar';
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $acao = 'Alterar';
+    $botao = 'alterar';
+
+
+    $dados = $ctrl->DetalharEquipamentoCTRL($_GET['id']);
+    if (empty($dados)) {
+        Util::ChamarPagina('consultar_equipamento');
+    }
 }
 #Cadastrar
 if (isset($_POST['btn_gravar'])) {
@@ -33,6 +42,25 @@ if (isset($_POST['btn_gravar'])) {
         echo $ret;
     }
 }
+#Alterar
+else if (isset($_POST['btn_alterar'])) {
+    $vo = new EquipamentoVO;
+
+    $vo->setIdTipoEquipamento($_POST['tipo']);
+    $vo->setIdModeloEquipamento($_POST['modelo']);
+    $vo->setIdentificacao($_POST['identificacao']);
+    $vo->setDescricao($_POST['descricao_equipamento']);
+    $vo->setId($_POST['id_alt']);
+
+
+    $ret = $ctrl->AlterarEquipamentoCTRL($vo);
+
+    
+    if ($_POST['btn_alterar'] == 'ajx') {
+        echo $ret;
+    }
+    
+}
 #Excluir
 else if (isset($_POST['btn_excluir'])) {
     $vo = new EquipamentoVO;
@@ -40,7 +68,7 @@ else if (isset($_POST['btn_excluir'])) {
 
     $ret = $ctrl->ExcluirEquipamentoCTRL($vo);
 
-    if ($_POST['btn_excluir']) {
+    if ($_POST['btn_excluir'] == 'ajx') {
         echo $ret;
     }
 }
@@ -66,7 +94,7 @@ else if (isset($_POST['consultar_ajx']) && $_POST['consultar_ajx'] == 'ajx') {
                     <td><?= $item['identificacao'] ?></td>
                     <td><?= $item['descricao'] ?></td>
                     <td>
-                        <a href="equipamento.php?id=<?= $item['id'] ?>" class="btn btn-warning btn-xs">Alterar</a>
+                        <a href="equipamento.php?id=<?= $item['id'] ?>" class="btn btn-warning btn-xs" onclick="PegarIdAlterarEquipamento(<?= $item['id'] ?>">Alterar</a>
                         <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal_excluir" onclick="ModalExcluir('<?= $item['id'] ?>' , '<?= '<br> Tipo: ' . $item['tipo'] . ' <br> Modelo: ' . $item['modelo'] . ' <br> Identificação: ' . $item['identificacao'] ?> ')">Excluir</button>
                     </td>
                 </tr>

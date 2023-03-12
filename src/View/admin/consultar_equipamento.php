@@ -74,7 +74,7 @@ require_once dirname(__DIR__, 2) . "/Resource/dataview/gerenciar_equipamento-dat
                                         <h3 class="card-title">Equipmentos cadastrados</h3>
                                         <div class="card-tools">
                                             <div class="input-group input-group-sm" style="width: 150px;">
-                                                <input type="text" onkeyup="ConsultarEquipamento()" name="nome_filtro" id="nome_filtro" class="form-control float-right" placeholder="Identificação">
+                                                <input type="text" onkeyup="ConsultarEquipamento()" name="nome_filtro" id="nome_filtro" class="form-control float-right" placeholder="Identificação" value="<?= $_GET['ident'] ?? ''?>">
 
                                                 <div class="input-group-append">
                                                     <button type="button" onclick="ConsultarModeloEquipamento()" class="btn btn-default"><i class="fas fa-search"></i></button>
